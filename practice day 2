@@ -1,0 +1,36 @@
+select * from employees
+
+SELECT * from "public"."departments"
+
+--select title of the emp no 10006
+SELECT title from titles where emp_no =10006
+
+
+
+--select details with named coloumns
+SELECT emp_no as "Employee Number", birth_date as "Birth Date" ,first_name as "First Name" from employees
+
+--concatination 
+SELECT concat( emp_no,' is a ',title ) as "Emaployee Title" from titles
+
+--concatination from emaployees
+SELECT concat( first_name,' ', last_name) as "Full Name" from employees
+
+
+--get the count from the table
+select count("emp_no") from employees
+
+--get the max from the sallery
+SELECT max( "salary" ) from salaries;
+
+--get the sum from the sallries
+SELECT sum("salary") from salaries;
+
+--filter on first name and last name
+select * 
+FROM employees 
+WHere first_name ='Mayumi' and last_name ='Schueller'
+
+
+
+
