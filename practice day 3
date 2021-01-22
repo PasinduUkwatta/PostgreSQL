@@ -1,0 +1,12 @@
+
+--And or keyword  uasge in queery
+SELECT * from employees WHERE first_name ='Georgi' or first_name ='Bezalel'
+
+--GET THE COUNT
+SELECT count( "customerid" ) from customers WHERE (state ='OR' OR state='NY') AND gender ='F'
+
+--GET THE ALL DETAILS 
+SELECT * from customers WHERE (state ='OR' OR state='NY') AND gender ='F'
+
+--get count of the customers age without 55 years old
+SELECT count( "customerid" ) FROM customers WHERE NOT age=55
