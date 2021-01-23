@@ -1,0 +1,30 @@
+-Select amount beteween range
+SELECT * from salaries WHERE salary BETWEEN 50000 and 51000
+
+
+SELECT * 
+from salaries 
+WHERE salary BETWEEN 50000 and 51000
+
+SELECT * 
+from salaries 
+WHERE emp_no in(10011,10001)
+
+--get the results using like keyword
+SELECT * from employees WHERE first_name LIKE '%ars%'
+
+SELECT * from employees
+
+--this is case sensitive
+SELECT * from employees WHERE first_name LIKE '%aki%'
+
+--this is not case sensetive uppercse or lowercase
+SELECT * from employees WHERE first_name iLIKE '%AKi%'
+
+--get the currennt time zone
+show timezone
+
+
+set time zone 'utc'
+
+
