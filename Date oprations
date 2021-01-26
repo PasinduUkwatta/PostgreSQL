@@ -1,0 +1,25 @@
+
+SELECT AGE(birth_date), * FROM employees
+WHERE (
+   EXTRACT (YEAR FROM AGE(birth_date))
+) > 60 ;
+
+
+            
+
+
+SELECT count(emp_no) FROM employees
+where EXTRACT (MONTH FROM hire_date) = 2;
+
+
+SELECT COUNT(emp_no) FROM employees
+WHERE EXTRACT (MONTH FROM birth_date) = 11;
+
+
+
+SELECT MAX(AGE(birth_date)) FROM employees;
+
+
+SELECT COUNT(orderid)
+FROM orders
+WHERE DATE_TRUNC('month', orderdate) = date '2004-01-01';
