@@ -1,0 +1,74 @@
+SELECT * FROM employees
+
+--get the value one time in the query
+select DISTINCT * from salaries where salary BETWEEN 142000 and 142500
+
+
+--get the desending ordr according to the sallery
+select DISTINCT * from salaries where salary BETWEEN 142000 and 142500 ORDER by salary desc
+
+
+
+--in here the order by is only working with the last name ONLY
+--beacuse the last name is the right most one one to the decending
+--first name is order by asending by defult
+SELECT * from employees
+ORDER by first_name,last_name DESC
+
+--order according to the length of the first name
+SELECT * from employees
+ORDER by length( first_name ) DESC
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+--joining table using whwere
+select emp.emp_no,concat( emp.first_name,emp.last_name ) as "name",sal.salary 
+from employees as emp,salaries as sal
+where emp.emp_no=sal.emp_no 
+
+--inner join
+select emp.emp_no,concat( emp.first_name,emp.last_name ) as "name",sal.salary 
+from employees as emp
+inner join salaries as sal on emp.emp_no=sal.emp_no
+order by emp.emp_no ASC
+
+
+--inner join three TABLES
+
+select a.emp_no,b.salary,b.from_date,c.title
+from employees as a
+INNER join salaries as b on a.emp_no=b.emp_no
+INNER join titles as c on a.emp_no =c.emp_no 
+and (b.from_date + interval '2 days')=c.from_date
+ORDER by a.emp_no ASC ,b.from_date asc
+ 
+ 
+select a.emp_no,b.salary,b.from_date,c.title
+from employees as a
+INNER join salaries as b on a.emp_no=b.emp_no
+INNER join titles as c on a.emp_no =c.emp_no 
+and (b.from_date + interval '2 days'=c.from_date
+or b.from_date=c.from_date)
+ORDER by a.emp_no ASC ,b.from_date asc
+
+
+---left join
+
+select count( emp.emp_no)
+from employees as emp
+left join dept_manager as dep on emp.emp_no =dep.emp_no
+where dep.emp_no is NULL
+
+select a.emp_no,b.salary,b.from_date,COALESCE( c.title,'No Title Change') as "Title"
+from employees as a
+INNER join salaries as b on a.emp_no=b.emp_no
+left join titles as c on a.emp_no =c.emp_no 
+and (b.from_date + interval '2 days'=c.from_date
+or b.from_date=c.from_date)
+ORDER by a.emp_no ASC ,b.from_date asc
+
+---using keyword
+
+select emp.emp_no,concat( emp.first_name,emp.last_name ) as "name",sal.salary 
+from employees as emp
+inner join salaries as sal using (emp_no)
