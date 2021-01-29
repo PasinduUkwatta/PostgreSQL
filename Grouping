@@ -1,0 +1,47 @@
+
+--group the data according to the department
+select dept_no,count( emp_no)
+from dept_emp
+GROUP by dept_no
+
+--having and where in group by function
+select d.dept_name,count( e.emp_no) as "# no of employees"
+from employees as e
+INNER join dept_emp as de on de.emp_no =e.emp_no
+INNER JOIN departments as d on de.dept_no = d.dept_no
+where e.gender ='F'
+group BY d.dept_name
+HAVING count( e.emp_no ) >25000
+
+--Order by according to no of employees
+select d.dept_name,count( e.emp_no) as "# no of employees"
+from employees as e
+INNER join dept_emp as de on de.emp_no =e.emp_no
+INNER JOIN departments as d on de.dept_no = d.dept_no
+group BY d.dept_name
+ORDER by count( e.emp_no ) DESC
+
+--group by must use aggregate fucntion 
+SELECT emp_no,max(from_date)
+from salaries
+group by emp_no
+
+--union operator
+select emp_no
+from employees
+GROUP by emp_no
+
+UNION 
+
+SELECT max(salary)
+from salaries
+GROUP by emp_no,salary
+
+
+
+
+
+
+
+
+
