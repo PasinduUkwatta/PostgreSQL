@@ -1,0 +1,12 @@
+select * from employees where gender ='M' AND emp_no <10100
+
+SELECT max( salary) FROM salaries
+
+--get the avarage salry according to the departments
+SELECT *,
+
+avg( salary) OVER(
+PARTITION by d,dept_name)
+FROM salaries
+JOIN dept_emp USING (emp_no)
+JOIN departments AS  d USING (dept_no)
