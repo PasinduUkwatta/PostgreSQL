@@ -1,0 +1,27 @@
+SELECT * from employees 
+where emp_no <10100 
+
+select prod_id,price,category,first_value( price )
+over (
+PARTITION by category 
+order by price
+range BETWEEN UNBOUNDED PRECEDING
+and UNBOUNDED FOLLOWING
+)
+
+from products
+
+
+select prod_id,price,category,last_value( price )
+over (
+PARTITION by category 
+order by price
+range BETWEEN UNBOUNDED PRECEDING
+and UNBOUNDED FOLLOWING
+)
+
+from products
+
+ 
+
+ 
