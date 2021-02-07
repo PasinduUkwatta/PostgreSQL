@@ -1,0 +1,46 @@
+--case system
+SELECT
+o.orderid,o.customerid,
+CASE
+when o.customerid =1
+then 'my first customer'
+ELSE 'not my first customer'
+
+END,
+o.netamount
+from orders as o 
+order by o.customerid
+ 
+ --views
+ 
+ create view salaray as 
+ select * FROM
+ salaries
+ 
+ --renamae a view
+ CREATE or REPLACE  view salaray as
+ select * 
+ from salaries
+ 
+ --delete the view
+ drop view salaray
+ 
+ --creating VIEW
+ CREATE view last_salary_change as
+ SELECT e.emp_no,max( s.from_date)
+ 
+ FROM salaries as s
+ join employees as e USING(emp_no)
+ join dept_emp as de using(emp_no)
+ join departments as d using (dept_no)
+ 
+ GROUP by e.emp_no
+ order by e.emp_no
+ 
+ ---get the records from the VIEW
+ select * from last_salary_change
+ 
+  select * from salaries
+  join last_salary_change as l using  (emp_no)
+  where from_date =l.max
+  order by emp_no
