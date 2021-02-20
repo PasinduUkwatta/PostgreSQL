@@ -1,0 +1,87 @@
+select * from employees
+
+--index using 
+  
+SELECT * FROM World
+
+--expalin anayze helps to see the query plan
+EXPLAIN ANALYSE
+SELECT "name",district,countrycode from city
+where countrycode in ('TUN','BE','NL')
+
+--partioal index
+CREATE INDEX idx_countrycode
+on city(countrycode) 
+where countrycode in ('TUN','BE','NL')
+
+--index algorithems
+
+--hash algorithem
+CREATE INDEX idx_countrycode
+on city using hash (countrycode)
+
+EXPLAIN ANALYSE
+SELECT "name",district,countrycode 
+from city
+where countrycode = 'BEL' AND countrycode ='TUN' AND countrycode ='NLD'
+
+--subquery
+SELECT title,price,(
+select avg( price) 
+FROM products)
+as "global avarage price"
+from products
+
+select *
+from employees
+where salary > (
+SELECT avg(salary)
+from salaries)
+
+
+
+--select the employee older than avarage age
+EXPLAIN ANALYSE
+select *
+from employees
+where age(birth_date) > (
+select avg(age(birth_date))
+from employees
+) AND gender ='M'
+
+ 
+ ---62 years 6 mons 19 days 12:43:16.968771
+ (
+select avg(age(birth_date))
+from employees
+)
+
+--62 years 6 mons 18 days 00:33:55.994169
+ (
+select avg(age(birth_date))
+from employees
+WHERE gender ='M'
+)
+
+--62 years 6 mons 21 days 18:55:26.280152
+ (
+select avg(age(birth_date))
+from employees
+WHERE gender ='F'
+)
+
+select *
+from salaries as s
+where from_date =(
+select max(from_date)
+from salaries as sp
+where sp.emp_no =s.emp_no
+)
+
+order by emp_no asc
+
+
+EXPLAIN ANALYSE
+select *
+from salaries
+
