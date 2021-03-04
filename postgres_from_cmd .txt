@@ -1,0 +1,15 @@
+psql -U postgres postgres
+
+createuser --interactive
+
+ create role employee_read;
+
+ \du
+
+\dt
+
+\conninfo
+
+create database test;
+
+drop database test;
