@@ -1,0 +1,12 @@
+ztm=# CREATE TABLE student(
+ztm(# student_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+ztm(# first_name VARCHAR(255) NOT NULL,
+ztm(# last_name VARCHAR(255) NOT NULL,
+ztm(# email VARCHAR(255) NOT NULL,
+ztm(# date_of_birth DATE NOT NULL
+ztm(# );
+CREATE TABLE
+ztm=# \DT
+invalid command \DT
+Try \? for help.
+ztm=# \dt
