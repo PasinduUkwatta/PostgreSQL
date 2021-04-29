@@ -1,0 +1,52 @@
+CREATE DOMAIN Rating SMALLINT CHECK(VALUE >0 AND VALUE <=5);
+CREATE type Feedback AS(
+student_id UUID,
+rating Rating,
+feedack TEXT
+
+)
+
+
+CREATE TABLE student(
+student_id uuid PRIMARY key DEFAULT uuid_generate_v4() ,
+first_name VARCHAR (255) not NULL,
+last_name VARCHAR (255) not NULl,
+date_of_birth DATe  not NULL
+
+)
+
+
+CREATE TABLE subject(
+subject_id uuid PRIMARY key DEFAULT uuid_generate_v4() ,
+subject TEXT not NULL,
+description TEXT 
+)
+
+CREATE TABLE teacher(
+teacher_id uuid PRIMARY key DEFAULT uuid_generate_v4(),
+first_name VARCHAR (255) not NULL,
+last_name VARCHAR (255) not NULl,
+date_of_birth DATe  not NULL,
+email TEXT 
+
+)
+
+ALTER TABLE student
+ADD COLUMN email TEXT
+
+CREATE TABLE course(
+course_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+"name" TEXT not NULL,
+description TEXT,
+subject_id uuid REFERENCES subject(subject_id),
+teacher_id uuid REFERENCES teacher(teacher_id),
+feedback feedback[]
+)
+
+CREATE TABLE enrollment(
+course_id uuid REFERENCES course(course_id) ,
+student_id uuid REFERENCES student(student_id) ,
+enrollment_date DATE not NULL,
+CONSTRAINT pk_enrollment PRIMARY key (course_id,student_id)
+
+)
