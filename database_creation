@@ -1,0 +1,55 @@
+-- CREATE DOMAIN SMALLINT CHECK(VALUE >0 AND VALUE <=5);
+-- CREATE type Feedback AS(
+-- student_id UUID,
+-- rating SMALLINT,
+-- feedack TEXT
+-- 
+-- )
+
+--creating the tables for the database
+CREATE TABLE student(
+student_id INTEGER PRIMARY key ,
+first_name VARCHAR (255) not NULL,
+last_name VARCHAR (255) not NULl,
+date_of_birth DATe  not NULL
+
+)
+
+
+CREATE TABLE subject(
+subject_id int PRIMARY key ,
+subject TEXT not NULL,
+description TEXT 
+)
+
+CREATE TABLE teacher(
+teacher_id INTEGER PRIMARY key ,
+first_name VARCHAR (255) not NULL,
+last_name VARCHAR (255) not NULl,
+date_of_birth DATe  not NULL,
+email TEXT 
+
+)
+
+-- adding the email field after creating the table
+ALTER TABLE student
+ADD COLUMN email TEXT
+
+CREATE TABLE course(
+course_id int PRIMARY KEY,
+"name" TEXT not NULL,
+description TEXT,
+subject_id INT REFERENCES subject(subject_id),
+teacher_id int REFERENCES teacher(teacher_id),
+feedback text 
+)
+
+
+
+CREATE TABLE enrollmennt(
+course_id INT REFERENCES course(course_id) ,
+student_id INT REFERENCES student(student_id) ,
+enrollment_date DATE not NULL,
+CONSTRAINT pk_enrollment UNIQUE (course_id,student_id)
+
+)
